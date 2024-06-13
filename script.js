@@ -46,7 +46,7 @@ function typeStartText() {
             setTimeout(typeStartText, 200);
         }
     } else {
-        startText.innerHTML += '_';
+        startText.innerHTML = startMessage + '<span class="blink">_</span>';
         startText.addEventListener('click', startVideo);
     }
 }
@@ -159,6 +159,7 @@ function copyAddress() {
 document.addEventListener("DOMContentLoaded", () => {
     typeStartText();
     setInterval(glitchEffect, 12000); // Trigger glitch every 12 seconds
+    scrollToTopOnMobile(); // Scroll to top on mobile when content is loaded
 });
 
 // Interactive terminal logic
@@ -225,9 +226,14 @@ function glitchEffect() {
     const originalText = contractAddressElement.textContent;
     const glitchText = "YOUR TICKET FOR FREEDOM";
 
+    // Store the original text in a dataset attribute if not already stored
+    if (!contractAddressElement.dataset.originalText) {
+        contractAddressElement.dataset.originalText = originalText;
+    }
+
     contractAddressElement.textContent = glitchText;
     setTimeout(() => {
-        contractAddressElement.textContent = originalText;
+        contractAddressElement.textContent = contractAddressElement.dataset.originalText;
     }, 1200); // Revert back after 1200ms
 }
 
@@ -246,7 +252,6 @@ function triggerMatrixEffect() {
     });
 
     encodedMessageElement.appendChild(fragment); // Append the new fragment
-
     const spans = encodedMessageElement.querySelectorAll('span');
 
     spans.forEach(span => {
