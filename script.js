@@ -161,11 +161,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Interactive terminal logic
+terminalInput.addEventListener('focus', () => {
+    // Any additional logic for mobile if needed
+    if (window.innerWidth <= 600) {
+        // Specific adjustments for mobile devices
+        terminalInput.scrollIntoView({ behavior: 'smooth' });
+    }
+});
+
 terminalInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         const inputText = terminalInput.innerText.trim();
         terminalOutput.innerText = ''; // Clear the terminal output
+
+        // Add your existing commands here...
         if (inputText.toLowerCase() === 'matrix') {
             triggerMatrixEffect();
         } else if (inputText.toLowerCase() === 'dexscreener') {
@@ -177,7 +187,9 @@ terminalInput.addEventListener('keydown', (e) => {
         } else {
             displayErrorMessage();
         }
+
         terminalInput.innerText = ''; // Clear the terminal input
+        terminalInput.focus(); // Ensure input remains focused
     }
 });
 

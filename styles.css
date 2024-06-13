@@ -180,16 +180,24 @@ pre {
     outline: none;
 }
 
-#terminalOutput {
-    margin-top: 10px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+#terminalInput {
+    display: inline-block;
+    outline: none;
     border: none;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-    overflow-wrap: break-word;
-    color: green; /* Ensure output text color matches */
+    color: green;
+    background: black;
+    font-family: 'Courier New', Courier, monospace;
+    caret-color: green;
+    position: relative;
+    min-width: 100px; /* Ensure it's not too small on mobile */
+    padding: 5px; /* Add padding for better touch interaction */
+}
+
+@media (max-width: 600px) {
+    #terminalInput {
+        min-width: 200px; /* Increase the minimum width for better touch interaction */
+        padding: 10px; /* Increase padding on smaller screens */
+    }
 }
 
 #fallingTextContainer {
