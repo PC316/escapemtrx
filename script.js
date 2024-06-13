@@ -12,9 +12,15 @@ const terminalOutput = document.getElementById('terminalOutput');
 const contractAddressElement = document.getElementById('contractAddress');
 const telegramLinkElement = document.getElementById('telegramLink').querySelector('a');
 const fallingTextContainer = document.getElementById('fallingTextContainer');
+const enterButton = document.getElementById('enterButton'); // Enter button
 
 const newMessage = `
-010101000110111100100000011000010110110001101100001000000110001101110010011110010111000001110100011011110010000001100100011001010110011101100101011011100111001100101100001000000110100101110100001001110111001100100000011101000110100101101101011001010010000001110100011011110010000001100101011110000110100101110100001000000111010001101000011001010010000001101101011000010111010001110010011010010111100000101110001000000101001101100101011010010111101001100101
+0100100101110100001001110111001100100000011101000110100101101101011001010010000001110100011011110010000001100101011110000110100101110100001000000111010001101000011001010010000001101101011000010111010001110010011010010111100000101110
+0101001101100101011010010111101001100101001000000110001101101111011011100111010001110010011011110110110000100000011011110110011000100000011110010110111101110101011100100010000001100110011101010111010001110101011100100110010100101100
+0010000001100100011001010110011001111001001000000111010001101000011001010010000001101110011011110111001001101100011100110010110000100000011000010110111001100100001000000110010101101101011000100111001001100001011000110110010100100000
+011101000110100001100101001000000111010101101110011010110110111001101111011101110110111001110010010000001110011011101000110000101111001001000000111001101101000011000010111001001110000001000000110000101101110011001000110010000100000
+0111011001101001011001110110100101101100011011000110000101101110001011100010000001010100011010000110010100100000011100000110111101110111011001010111001000100000011010010111001100100000011010010110111000100000011110010110111101110101
+0111001000100000011010000110000101101110011001000111001100101110
 `.replace(/\s/g, ''); // dense block of zeros and ones without spaces
 
 let matrixEffectRunning = false;
@@ -172,26 +178,31 @@ terminalInput.addEventListener('focus', () => {
 terminalInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
-        const inputText = terminalInput.innerText.trim();
-        terminalOutput.innerText = ''; // Clear the terminal output
-
-        // Add your existing commands here...
-        if (inputText.toLowerCase() === 'matrix') {
-            triggerMatrixEffect();
-        } else if (inputText.toLowerCase() === 'dexscreener') {
-            window.open('https://dexscreener.com/solana/cim7gxrqnwczzqjfob3mt1ppgcjq9ubgbqavjynehxvn?maker=AyXmbLPCLV5A4uwoyiJwGCpJUwUFfnyt7mGpquYcaLoT', '_blank');
-        } else if (inputText.toLowerCase() === 'university') {
-            window.open('https://www.university.com/', '_blank');
-        } else if (['T8', 'C8', 'S8'].includes(inputText)) { // Add more correct answers here
-            revealKnight(inputText);
-        } else {
-            displayErrorMessage();
-        }
-
-        terminalInput.innerText = ''; // Clear the terminal input
-        terminalInput.focus(); // Ensure input remains focused
+        handleTerminalInput();
     }
 });
+
+enterButton.addEventListener('click', handleTerminalInput);
+
+function handleTerminalInput() {
+    const inputText = terminalInput.innerText.trim();
+    terminalOutput.innerText = ''; // Clear the terminal output
+
+    if (inputText.toLowerCase() === 'matrix') {
+        triggerMatrixEffect();
+    } else if (inputText.toLowerCase() === 'dexscreener') {
+        window.open('https://dexscreener.com/solana/cim7gxrqnwczzqjfob3mt1ppgcjq9ubgbqavjynehxvn?maker=AyXmbLPCLV5A4uwoyiJwGCpJUwUFfnyt7mGpquYcaLoT', '_blank');
+    } else if (inputText.toLowerCase() === 'university') {
+        window.open('https://www.university.com/', '_blank');
+    } else if (['T8', 'C8', 'S8'].includes(inputText)) { // Add more correct answers here
+        revealKnight(inputText);
+    } else {
+        displayErrorMessage();
+    }
+
+    terminalInput.innerText = ''; // Clear the terminal input
+    terminalInput.focus(); // Ensure input remains focused
+}
 
 function revealKnight(inputText) {
     const correctMessages = {
