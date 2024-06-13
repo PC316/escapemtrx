@@ -74,7 +74,7 @@ body {
     align-items: flex-start;
     height: 100%;
     width: 100%;
-    padding-top: 80px;
+    padding-top: 80px; /* Increase padding to 80px */
     box-sizing: border-box;
     overflow: auto; /* Add scroll bar */
 }
@@ -231,7 +231,7 @@ pre {
     }
 
     #content {
-        padding-top: 80px; /* Increase padding to ensure Telegram link is visible */
+        padding-top: 120px; /* Increase padding to ensure Telegram link is visible */
     }
 }
 
@@ -252,5 +252,5 @@ pre {
 }
 
 .spacer {
-    height: 50px; /* Add this spacer for spacing */
+    height: 80px; /* Increase the spacer height to 80px */
 }
