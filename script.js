@@ -57,12 +57,20 @@ function startVideo() {
     transitionVideo.play();
 }
 
-transitionVideo.addEventListener('ended', startSite);
+transitionVideo.addEventListener('ended', () => {
+    // Close video on mobile devices after it ends
+    if (window.innerWidth <= 600) {
+        startSite();
+    } else {
+        startSite();
+    }
+});
 
 function startSite() {
     videoScreen.style.display = 'none';
     document.getElementById('mainScreen').style.display = 'block';
     displayEncodedMessage();
+    terminalInput.focus(); // Focus the terminal input when the video ends
     setInterval(revealT8Hint, 600000); // Reveal T8 every 10 minutes
 }
 
@@ -78,7 +86,9 @@ function displayEncodedMessage() {
         } else {
             stopTypeSound();
             encodedMessageElement.innerHTML = newMessage;
-            terminalInput.focus();
+            terminalInput.focus(); // Ensure the terminal input is focused after typing ends
+            // Store the original message
+            encodedMessageElement.dataset.originalText = newMessage;
         }
     }
 
@@ -160,6 +170,8 @@ terminalInput.addEventListener('keydown', (e) => {
             triggerMatrixEffect();
         } else if (inputText.toLowerCase() === 'dexscreener') {
             window.open('https://dexscreener.com/solana/cim7gxrqnwczzqjfob3mt1ppgcjq9ubgbqavjynehxvn?maker=AyXmbLPCLV5A4uwoyiJwGCpJUwUFfnyt7mGpquYcaLoT', '_blank');
+        } else if (inputText.toLowerCase() === 'university') {
+            window.open('https://www.university.com/', '_blank');
         } else if (['T8', 'C8', 'S8'].includes(inputText)) { // Add more correct answers here
             revealKnight(inputText);
         } else {
@@ -185,8 +197,9 @@ ${correctMessages[inputText]}
 function displayErrorMessage() {
     const errorMessage = `
 TRY AGAIN
+<img src="error.jpg" alt="Try Again Image" class="responsive-image">
     `;
-    terminalOutput.innerText += `${errorMessage}`;
+    terminalOutput.innerHTML = `${errorMessage}`; // Use innerHTML to include the image
     stopMatrixEffect();
 }
 
@@ -202,7 +215,7 @@ function glitchEffect() {
 
 function triggerMatrixEffect() {
     matrixEffectRunning = true;
-    const text = encodedMessageElement.textContent;
+    const text = encodedMessageElement.dataset.originalText; // Retrieve the original text from the dataset
     encodedMessageElement.innerHTML = ''; // Clear the existing content
     const chars = text.split('');
     const fragment = document.createDocumentFragment();
@@ -222,9 +235,6 @@ function triggerMatrixEffect() {
         const delay = Math.random() * 2; // Random delay between 0 and 2 seconds
         span.style.animationDelay = `${delay}s`;
     });
-
-    // Store the original text in a dataset attribute
-    encodedMessageElement.dataset.originalText = text;
 }
 
 function stopMatrixEffect() {
