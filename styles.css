@@ -216,6 +216,10 @@ pre {
     margin: 10px auto; /* Center the image with some margin */
 }
 
+.spacer {
+    height: 50px; /* Add this spacer for spacing */
+}
+
 @media (max-width: 600px) {
     #videoScreen {
         width: 100%;
@@ -227,6 +231,10 @@ pre {
         height: 100%;
     }
 
+    #telegramLink {
+        left: 0; /* Ensure alignment on mobile */
+    }
+}
     #telegramLink {
         left: 0; /* Ensure alignment on mobile */
     }
