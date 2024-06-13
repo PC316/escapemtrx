@@ -1,0 +1,191 @@
+@keyframes matrixFall {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+}
+
+.matrix-fall {
+    position: relative;
+    animation: matrixFall 2s linear infinite;
+    will-change: transform, opacity;
+    color: green;
+    display: inline-block;
+}
+
+@keyframes revealT8 {
+    0%, 90%, 100% {
+        opacity: 0;
+    }
+    92%, 98% {
+        opacity: 1;
+    }
+}
+
+.reveal-t8::after {
+    content: 'T8';
+    position: absolute;
+    animation: revealT8 10s infinite;
+    color: green;
+}
+
+body {
+    background-color: black;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.terminal {
+    background: black;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    padding-top: 40px;
+    box-sizing: border-box;
+    overflow: auto; /* Add scroll bar */
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    cursor: pointer;
+    color: green;
+    white-space: nowrap;
+    margin-right: 20px;
+    margin-top: 40px;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 60%;
+    max-height: 80%;
+    position: relative;
+}
+
+.glitch-text {
+    position: relative;
+    color: green;
+    cursor: pointer;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+#telegramLink {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    color: green;
+    text-decoration: none;
+}
+
+#telegramLink a {
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#telegramLink a:hover {
+    text-decoration: none;
+}
+
+/* Add custom cursor for specific elements */
+#encodedMessage:hover,
+#contractAddress:hover,
+#telegramLink a:hover,
+#terminalInput:hover,
+#terminalOutput:hover,
+#terminalPrefix:hover {
+    cursor: url('chess_horse_cursor.png'), auto;
+}
+
+#terminal {
+    margin-top: 20px;
+}
+
+#terminalPrefix {
+    display: inline-block;
+}
+
+#terminalInput {
+    display: inline-block;
+    outline: none;
+    border: none;
+    color: green;
+    background: black;
+    font-family: 'Courier New', Courier, monospace;
+    caret-color: green;
+    position: relative;
+}
+
+#terminalInput:focus {
+    outline: none;
+}
+
+#terminalOutput {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    color: green; /* Ensure output text color matches */
+}
+
+#fallingTextContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ensure falling text doesn't interfere with interactions */
+}

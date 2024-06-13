@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Style Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="terminal" id="startScreen">
+        <div class="centered">
+            <pre class="glitch-text" id="startText"></pre>
+        </div>
+    </div>
+    <div class="terminal" id="videoScreen" style="display:none;">
+        <video id="transitionVideo" width="100%" height="100%">
+            <source src="your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="terminal" id="mainScreen" style="display:none;">
+        <div id="content">
+            <div class="vertical-text glitch-text bold-text" id="contractAddress" onclick="copyAddress()">2J5uSgqgarWoh7QDBmHSDA3d7UbfBKDZsdy1ypTSpump</div>
+            <div class="message-container">
+                <div class="glitch-text bold-text" id="telegramLink"><a href="https://t.me/yourtelegram" target="_blank">TELEGRAM</a></div>
+                <pre id="encodedMessage" class="glitch-text bold-text"></pre>
+                <div id="terminal" class="glitch-text bold-text">
+                    <span id="terminalPrefix">></span>
+                    <span id="terminalInput" contenteditable="true"></span>
+                    <div id="terminalOutput"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fallingTextContainer"></div> <!-- Container for falling text -->
+    <audio id="typeSound" src="type-sound.mp3" preload="auto"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
