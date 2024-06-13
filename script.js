@@ -13,9 +13,10 @@ const contractAddressElement = document.getElementById('contractAddress');
 const telegramLinkElement = document.getElementById('telegramLink').querySelector('a');
 const fallingTextContainer = document.getElementById('fallingTextContainer');
 const enterButton = document.getElementById('enterButton'); // Enter button
+const backgroundMusic = document.getElementById('backgroundMusic'); // Background music
 
 const newMessage = `
-01001001011101000010011101110011001000000111010001101001011011010110010100100000011101000110111100100000011001010111100001101001011101000010000001110100011010000110010100100000011011010110000101110100011100100110100101111000001011100101001101100101011010010111101001100101001000000110001101101111011011100111010001110010011011110110110000100000011011110110011000100000011110010110111101110101011100100010000001100110011101010111010001110101011100100110010100101100001000000110010001100101011001110111100101110100011010000110010100100000011011100110111101110010011011000111001100101100001000000110000101101110011001000010000001100101011011010110001001110010011000010110001101100101001000000111010001101000011001010010000001110101011011100110101101101110011011110111011101101110011100100100111001111001011010101100001011100100010000001110011011010000110000101110010011000010111000000100000011000010110111001100100011001000010000001110110011010010110011101101001011011000110110001100001011011100010111000100000010101000110100001100101001000000111000001101111011101110110010101110010001000000110100101110011001000000110100101101110001000000111100101101111011101010111001000100000011010000110000101101110011001000111001100101110
+010101000110100001101001011100110010000001110000011100100110111101101001011001010110001101110100001000000110100001101111011011000110010000111010011101000110100001101111011001010010000001101011011001010111100101110011001000000111010001101111001000000111100101101111011101010111001000100000011001100111001001100101011001000110111101101101001011000010000001110100011010000110010100100000011000100110110001101111011011110110111000111010011101000110100001101001011100100111010000101110001000000110100101101110001000000110010101100011011000010111000011100000100000011101000110100001100101001000000100110101100001011101000111001001101001011110000011101000010111001011100010000001101001011101000010011101110011001000000110011001101111011100100010000001110100011010000110010100100000011101110110000101110010011100100110100101101111011100100111001100101110
 `.replace(/\s/g, ''); // dense block of zeros and ones without spaces
 
 let matrixEffectRunning = false;
@@ -65,6 +66,7 @@ transitionVideo.addEventListener('ended', () => {
     } else {
         startSite();
     }
+    backgroundMusic.play(); // Start playing background music when the video ends
 });
 
 function startSite() {
@@ -190,7 +192,9 @@ function handleTerminalInput() {
         window.open('https://dexscreener.com/solana/cim7gxrqnwczzqjfob3mt1ppgcjq9ubgbqavjynehxvn?maker=AyXmbLPCLV5A4uwoyiJwGCpJUwUFfnyt7mGpquYcaLoT', '_blank');
     } else if (inputText.toLowerCase() === 'university') {
         window.open('https://www.university.com/', '_blank');
-    } else if (['T8', 'C8', 'S8'].includes(inputText)) { // Add more correct answers here
+    } else if (inputText.toLowerCase() === 'alpha') {
+        window.open('https://x.com/cobratate', '_blank');
+    } else if (['T8', 'solana', 'secret'].includes(inputText)) { // Add more correct answers here
         revealKnight(inputText);
     } else {
         displayErrorMessage();
@@ -202,9 +206,9 @@ function handleTerminalInput() {
 
 function revealKnight(inputText) {
     const correctMessages = {
-        'T8': 'BE A MAN LIKE ME',
-        'C8': 'STAY SHARP',
-        'S8': 'KEEP IT UP'
+        'T8': 'You think you’re tough because you dabble in the markets? Please. You’re nothing but a bunch of keyboard warriors. I’m Andrew Tate, and I’m here to wake you up.',
+        'solana': 'I will crash Solana Network',
+        'secret': 'Here’s a secret most of you don’t get: The real money in crypto isn’t made by following the hype. It’s made by the insiders, the ones who know the game before you even hear about it. If you want to win, you need to start thinking like the masterminds pulling the strings, not the clueless masses following the herd.'
     };
     const correctMessage = `
 ${correctMessages[inputText]}
@@ -215,7 +219,6 @@ ${correctMessages[inputText]}
 
 function displayErrorMessage() {
     const errorMessage = `
-TRY AGAIN
 <img src="error.jpg" alt="Try Again Image" class="responsive-image">
     `;
     terminalOutput.innerHTML = `${errorMessage}`; // Use innerHTML to include the image
@@ -224,7 +227,7 @@ TRY AGAIN
 
 function glitchEffect() {
     const originalText = contractAddressElement.textContent;
-    const glitchText = "YOUR TICKET FOR FREEDOM";
+    const glitchText = "FREEDOM TICKET";
 
     // Store the original text in a dataset attribute if not already stored
     if (!contractAddressElement.dataset.originalText) {
@@ -252,6 +255,7 @@ function triggerMatrixEffect() {
     });
 
     encodedMessageElement.appendChild(fragment); // Append the new fragment
+
     const spans = encodedMessageElement.querySelectorAll('span');
 
     spans.forEach(span => {
